@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+    <script>
+        let nome1 = 'ryan agard';
+
+        let possiveisPalavras = ["a", "ad", "adar", "adargar", "aganar", "agar", "agarra", "agradar", "agrandar", "agrar", "ana", "anadar", "anda", "andar", "anga", "angra", "ar", "aradar", "arar", "arara", "ardra", "d", "da", "daga", "danar", "dar", "dr", "draga", "dragar", "g", "gadar", "gana", "ganara", "gandar", "gandra", "garnar", "garra", "gay", "gradar", "granada", "granar", "grand", "n", "na", "nada", "nadar", "naga", "nagar", "nara", "ng", "r", "rad", "rada", "radar", "raga", "ragada", "rana", "rangar", "rara", "ray", "y", "yang"];
+
+        nome1 = nome1.replace(' ', '').split('').sort().join('');
+        let comparar;
+        let arrayFinal = [];
+        for (let i = 0; i < possiveisPalavras.length; i++) {
+            for (let a = 0; a < possiveisPalavras.length; a++) {
+                comparar = possiveisPalavras[i] + possiveisPalavras[a];
+
+                if (comparar.length == nome1.length) {
+
+                    if (comparar.split('').sort().join('') == nome1) {
+
+                        arrayFinal.push([possiveisPalavras[i], possiveisPalavras[a]])
+
+
+                    }
+
+                }
+
+            }
+        }
+        arrayFinal = arrayFinal.slice(0, arrayFinal.length / 2);
+
+
+
+
+        comparar = '';
+        arrayFinal2 = [];
+        for (let i = 0; i < possiveisPalavras.length; i++) {
+            for (let a = 0; a < possiveisPalavras.length; a++) {
+                for (let b = 0; b < possiveisPalavras.length; b++) {
+
+
+
+
+                    comparar = possiveisPalavras[i] + possiveisPalavras[a] + possiveisPalavras[b];
+                    if (comparar.length == nome1.length) {
+                        if (comparar.split('').sort().join('') == nome1) {
+
+                            arrayFinal2.push([possiveisPalavras[i], possiveisPalavras[a], possiveisPalavras[b]])
+                        }
+                    }
+
+
+
+
+
+
+
+                }
+            }
+        }
+
+
+
+
+
+
+        let asTresPalavras;
+        let possiveisTresPalavras = [];
+        for (let i = 0; i < possiveisPalavras.length; i++) {
+            for (let a = 0; a < possiveisPalavras.length; a++) {
+                for (let b = 0; b < possiveisPalavras.length; b++) {
+
+
+                    asTresPalavras = possiveisPalavras[i] + possiveisPalavras[a] + possiveisPalavras[b];
+                    if (asTresPalavras.length == nome1.length) {
+
+                        if (asTresPalavras.split('').sort().join('') == nome1) {
+
+                            possiveisTresPalavras.push([possiveisPalavras[i], possiveisPalavras[a], possiveisPalavras[b]])
+                        }
+                    }
+                }
+
+            }
+        }
+
+
+
+
+        for (let i = 0; i < possiveisTresPalavras.length; i++) {
+
+            possiveisTresPalavras[i] = possiveisTresPalavras[i].sort();
+
+        }
+        possiveisTresPalavras = possiveisTresPalavras.sort();
+
+
+        //console.log('FINALMENTE' + arrayFinalTres)
+        let a = 0;
+        let arrayFiltrado = [];
+        arrayFiltrado.push(possiveisTresPalavras[0])
+        for (let i = 0; i < possiveisTresPalavras.length - 1; i++) {
+            a++;
+
+
+
+            if (possiveisTresPalavras[i][0] != possiveisTresPalavras[a][0] && possiveisTresPalavras[i][1] != possiveisTresPalavras[a][1] && possiveisTresPalavras[i][2] != possiveisTresPalavras[a][2]) {
+                arrayFiltrado.push(possiveisTresPalavras[a])
+            }
+
+
+        }
+
+        console.log(arrayFiltrado)
+    </script>
+</body>
+
+</html>

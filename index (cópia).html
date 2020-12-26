@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="anagrams1/anagrams.js"></script>
+</head>
+
+<body>
+
+
+    <div>
+        <input type="text" id="input" size=40 value=ator>
+        <button id="findButton">Encontrar Anagramas</button>
+    </div>
+
+
+
+    <script>
+        const button = document.getElementById("findButton");
+        button.onclick = function() {
+            nome = document.getElementById("input").value;
+
+
+            nome = nome.toLowerCase().split("").sort().join("").trim();
+
+
+            let anagramas = [];
+            for (let i = 0; i < palavras.length; i++) {
+                if (palavras[i].length == nome.length) {
+                    if (palavras[i].toLowerCase().split("").sort().join("").trim() == nome) {
+
+                        anagramas.push(palavras[i]);
+                    }
+
+                }
+            }
+            console.log(anagramas);
+
+
+            var tag = document.createElement('h4');
+            var cabecalho = document.createTextNode(anagramas);
+            tag.appendChild(cabecalho);
+            document.body.appendChild(tag);
+
+
+
+
+
+
+        }
+    </script>
+</body>
+
+</html>
