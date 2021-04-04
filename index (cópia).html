@@ -1,57 +1,236 @@
-<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script type="text/javascript" src="anagrams1/anagrams.js"></script>
-</head>
+  </head>
 
-<body>
-
-
+  <body>
     <div>
-        <input type="text" id="input" size=40 value=ator>
-        <button id="findButton">Encontrar Anagramas</button>
+      <input type="text" id="input" size="40" value="ryan agard" />
+      <button id="findButton">Encontrar Anagramas</button>
     </div>
 
-
+    <div id="res"></div>
 
     <script>
-        const button = document.getElementById("findButton");
-        button.onclick = function() {
-            nome = document.getElementById("input").value;
+      const button = document.getElementById("findButton");
+      button.onclick = function () {
+        nome = document
+          .getElementById("input")
+          .value.toLowerCase()
+          .trim()
+          .replace(" ", "");
+        let nome1 = nome;
+        nome = contarLetras(nome);
 
+        let palavraDoDicionario;
 
-            nome = nome.toLowerCase().split("").sort().join("").trim();
+        let resultado;
+        var possiveisPalavras = [];
+        for (let i = 0; i < palavras.length; i++) {
+          palavraDoDicionario = contarLetras(palavras[i]);
+          //console.log(palavras[i])
 
+          resultado = gerarArrayComPossiveis(nome, palavraDoDicionario, i);
 
-            let anagramas = [];
-            for (let i = 0; i < palavras.length; i++) {
-                if (palavras[i].length == nome.length) {
-                    if (palavras[i].toLowerCase().split("").sort().join("").trim() == nome) {
+          if (resultado != undefined) {
+            possiveisPalavras.push(resultado);
+          }
 
-                        anagramas.push(palavras[i]);
-                    }
+          if (i == palavras.length - 1) {
+            //-1 pq começa com zero
+            console.log("palavras possiveis: " + possiveisPalavras.length);
 
-                }
-            }
-            console.log(anagramas);
-
-
-            var tag = document.createElement('h4');
-            var cabecalho = document.createTextNode(anagramas);
-            tag.appendChild(cabecalho);
-            document.body.appendChild(tag);
-
-
-
-
-
-
+            anagramasFinal(possiveisPalavras, nome1);
+          }
         }
-    </script>
-</body>
 
+        function anagramasFinal(possiveisPalavras, nome1) {
+          nome1 = nome1.replace(" ", "").split("").sort().join("");
+          let comparar;
+          let arrayFinal = [];
+          for (let i = 0; i < possiveisPalavras.length; i++) {
+            for (let a = 0; a < possiveisPalavras.length; a++) {
+              comparar = possiveisPalavras[i] + possiveisPalavras[a];
+              if (comparar.length == nome1.length) {
+                if (comparar.split("").sort().join("") == nome1) {
+                  arrayFinal.push([possiveisPalavras[i], possiveisPalavras[a]]);
+                }
+              }
+            }
+          }
+
+          arrayFinal = arrayFinal.slice(0, arrayFinal.length / 2);
+          console.log(arrayFinal);
+          document.getElementById("res").innerHTML +=
+            "Foi encontrado " +
+            arrayFinal.length +
+            " anagramas de duas palavras: <br>";
+          for (let i = 0; i < arrayFinal.length; i++) {
+            //res.innerHTML = arrayFinal[i] + ', ';
+            document.getElementById("res").innerHTML +=
+              arrayFinal[i][0] + " + " + arrayFinal[i][1] + "<br>";
+          }
+
+          ////////////////////////////////////////////
+
+          comparar = "";
+          arrayFinal = [];
+          for (let i = 0; i < possiveisPalavras.length; i++) {
+            for (let a = 0; a < possiveisPalavras.length; a++) {
+              comparar = possiveisPalavras[i] + possiveisPalavras[a];
+
+              if (comparar.length == nome1.length) {
+                if (comparar.split("").sort().join("") == nome1) {
+                  arrayFinal.push([possiveisPalavras[i], possiveisPalavras[a]]);
+                }
+              }
+            }
+          }
+          arrayFinal = arrayFinal.slice(0, arrayFinal.length / 2);
+
+          comparar = "";
+          arrayFinal2 = [];
+          for (let i = 0; i < possiveisPalavras.length; i++) {
+            for (let a = 0; a < possiveisPalavras.length; a++) {
+              for (let b = 0; b < possiveisPalavras.length; b++) {
+                comparar =
+                  possiveisPalavras[i] +
+                  possiveisPalavras[a] +
+                  possiveisPalavras[b];
+                if (comparar.length == nome1.length) {
+                  if (comparar.split("").sort().join("") == nome1) {
+                    arrayFinal2.push([
+                      possiveisPalavras[i],
+                      possiveisPalavras[a],
+                      possiveisPalavras[b],
+                    ]);
+                  }
+                }
+              }
+            }
+          }
+
+          console.log("possiveis palavras " + possiveisPalavras);
+
+          let asTresPalavras;
+          let possiveisTresPalavras = [];
+          for (let i = 0; i < possiveisPalavras.length; i++) {
+            for (let a = 0; a < possiveisPalavras.length; a++) {
+              for (let b = 0; b < possiveisPalavras.length; b++) {
+                asTresPalavras =
+                  possiveisPalavras[i] +
+                  possiveisPalavras[a] +
+                  possiveisPalavras[b];
+                if (asTresPalavras.length == nome1.length) {
+                  if (asTresPalavras.split("").sort().join("") == nome1) {
+                    possiveisTresPalavras.push([
+                      possiveisPalavras[i],
+                      possiveisPalavras[a],
+                      possiveisPalavras[b],
+                    ]);
+                  }
+                }
+              }
+            }
+          }
+
+          console.log("possiveis tres palavras " + possiveisTresPalavras);
+
+          for (let i = 0; i < possiveisTresPalavras.length; i++) {
+            possiveisTresPalavras[i] = possiveisTresPalavras[i].sort();
+          }
+          possiveisTresPalavras = possiveisTresPalavras.sort();
+
+          //console.log('FINALMENTE' + arrayFinalTres)
+          let a = 0;
+          let arrayFiltrado = [];
+          arrayFiltrado.push(possiveisTresPalavras[0]);
+          for (let i = 0; i < possiveisTresPalavras.length - 1; i++) {
+            a++;
+
+            if (
+              possiveisTresPalavras[i][0] != possiveisTresPalavras[a][0] &&
+              possiveisTresPalavras[i][1] != possiveisTresPalavras[a][1] &&
+              possiveisTresPalavras[i][2] != possiveisTresPalavras[a][2]
+            ) {
+              arrayFiltrado.push(possiveisTresPalavras[a]);
+            }
+          }
+
+          console.log(arrayFiltrado);
+
+          document.getElementById("res").innerHTML +=
+            "Foi encontrado " +
+            arrayFiltrado.length +
+            " anagramas de tres palavras: <br>";
+          for (let i = 0; i < arrayFiltrado.length; i++) {
+            //res.innerHTML = arrayFinal[i] + ', ';
+            document.getElementById("res").innerHTML +=
+              arrayFiltrado[i][0] +
+              " + " +
+              arrayFiltrado[i][1] +
+              " + " +
+              arrayFiltrado[i][2] +
+              "<br>";
+          }
+
+          /////////////////////////////////////////
+        }
+
+        function contarLetras(palavra) {
+          let arrayLetras = [];
+
+          palavra = palavra.split("");
+
+          for (let i = 0; i < palavra.length; i++) {
+            let quantas = palavra.filter((num) => num === palavra[i]).length;
+            arrayLetras.push([palavra[i], quantas]);
+          }
+          let totalLetras = arrayLetras.filter(function (item) {
+            return arrayLetras.hasOwnProperty(item)
+              ? false
+              : (arrayLetras[item] = true);
+          });
+
+          totalLetras.sort(); // organizar para desempenho
+          totalLetras = totalLetras.join(",");
+          totalLetras = totalLetras.replaceAll(",", "");
+          return totalLetras;
+        }
+
+        function gerarArrayComPossiveis(nome, palavraDoDicionario, indice) {
+          // verificar se tem as letras e qnt MENOR que em nome
+
+          let ultimaVolta;
+          ultimaVolta = palavraDoDicionario.length;
+          a = 0;
+          for (let i = 0; i < palavraDoDicionario.length; i += 2) {
+            if (nome.indexOf(palavraDoDicionario[i]) >= 0) {
+              if (
+                palavraDoDicionario[i + 1] <=
+                nome.substr(nome.indexOf(palavraDoDicionario[i]) + 1, 1)
+              ) {
+                a++; // bug do loop hahaha
+                if (a == palavraDoDicionario.length / 2) {
+                  return palavras[indice];
+                } else {
+                  continue;
+                }
+                continue;
+              } else {
+                //breka se a quantidade for maior
+                break;
+              }
+            } else {
+              // n tem a letra e breka
+              break;
+            }
+          }
+        }
+      };
+    </script>
+  </body>
 </html>
