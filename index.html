@@ -14,6 +14,7 @@
     </div>
 
     <div id="res"></div>
+    <div id="res_cinco"></div>
 
     <script>
       const button = document.getElementById("findButton");
@@ -45,51 +46,101 @@
             }
           }
         }
-        juntar_palavras(resultado);
-        function juntar_palavras(palavras_a_juntar) {
+
+        juntar_palavras5(resultado);
+        function juntar_palavras5(palavras_a_juntar) {
+          let cinco_palavras = [];
           let tres_palavras = [];
 
           for (let a = 0; a < palavras_a_juntar.length; a++) {
             for (let b = 0; b < palavras_a_juntar.length; b++) {
+              if (a == b) break;
               for (let c = 0; c < palavras_a_juntar.length; c++) {
-                if (a != b && a != c && b != c) {
-                  comparar =
-                    palavras_a_juntar[a] +
-                    palavras_a_juntar[b] +
-                    palavras_a_juntar[c];
-                  if (comparar.length == nome.length) {
-                    if (
-                      comparar.split("").sort().join("") ==
-                      nome.split("").sort().join("")
-                    ) {
-                      tres_palavras.push([
-                        palavras_a_juntar[a],
-                        palavras_a_juntar[b],
-                        palavras_a_juntar[c],
-                      ]);
+                if (a == c || b == c) break;
+
+                comparar_tres =
+                  palavras_a_juntar[a] +
+                  palavras_a_juntar[b] +
+                  palavras_a_juntar[c];
+                if (comparar_tres.length == nome.length) {
+                  if (
+                    comparar_tres.split("").sort().join("") ==
+                    nome.split("").sort().join("")
+                  ) {
+                    tres_palavras.push([
+                      palavras_a_juntar[a],
+                      palavras_a_juntar[b],
+                      palavras_a_juntar[c],
+                    ]);
+                  }
+                }
+
+                for (let d = 0; d < palavras_a_juntar.length; d++) {
+                  if (a == d || b == d || c == d) break;
+                  for (let e = 0; e < palavras_a_juntar.length; e++) {
+                    if (a == e || b == e || c == e || d == e) break;
+                    comparar_cinco =
+                      palavras_a_juntar[a] +
+                      palavras_a_juntar[b] +
+                      palavras_a_juntar[c] +
+                      palavras_a_juntar[d] +
+                      palavras_a_juntar[e];
+                    if (comparar_cinco.length == nome.length) {
+                      if (
+                        comparar_cinco.split("").sort().join("") ==
+                        nome.split("").sort().join("")
+                      ) {
+                        cinco_palavras.push([
+                          palavras_a_juntar[a],
+                          palavras_a_juntar[b],
+                          palavras_a_juntar[c],
+                          palavras_a_juntar[d],
+                          palavras_a_juntar[e],
+                        ]);
+                      }
                     }
                   }
                 }
               }
             }
           }
-          for (let d = 0; d < tres_palavras.length; d++) {
-            tres_palavras[d] = tres_palavras[d].sort();
+          console.log(cinco_palavras);
+          console.log(tres_palavras);
+          for (let f = 0; f < cinco_palavras.length; f++) {
+            cinco_palavras[f] = cinco_palavras[f].sort();
+          }
+          cinco_palavras = cinco_palavras.sort();
+
+          let final = remove_iguais(cinco_palavras);
+
+          document.getElementById("res_cinco").innerHTML +=
+            "Foi encontrado " +
+            final.length +
+            " anagramas de cinco palavras: <br>";
+
+          for (let i = 0; i < final.length; i++) {
+            document.getElementById("res_cinco").innerHTML += final[i] + "<br>";
+          }
+
+          for (let g = 0; g < tres_palavras.length; g++) {
+            tres_palavras[g] = tres_palavras[g].sort();
           }
           tres_palavras = tres_palavras.sort();
 
-          let final = Array.from(
-            new Set(tres_palavras.map((subarr) => subarr.join(" ")))
-          );
+          let final_tres = remove_iguais(tres_palavras);
 
           document.getElementById("res").innerHTML +=
             "Foi encontrado " +
-            final.length +
-            " anagramas de duas palavras: <br>";
+            final_tres.length +
+            " anagramas de três palavras: <br>";
 
-          for (let i = 0; i < final.length; i++) {
-            document.getElementById("res").innerHTML += final[i] + "<br>";
+          for (let i = 0; i < final_tres.length; i++) {
+            document.getElementById("res").innerHTML += final_tres[i] + "<br>";
           }
+        }
+
+        function remove_iguais(arr) {
+          return Array.from(new Set(arr.map((subarr) => subarr.join(" "))));
         }
 
         function qtdLetras(nome) {
