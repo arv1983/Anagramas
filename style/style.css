@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: rgb(223, 223, 223);
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+}
+
+.par {
+  margin: 0;
+  background-color: rgb(180, 180, 180);
+  height: 20px;
+  border-left: solid black 1px;
+  border-right: solid black 1px;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.impar {
+  margin: 0;
+  background-color: rgb(143, 143, 143);
+  height: 20px;
+  border-left: solid black 1px;
+  border-right: solid black 1px;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.topo {
+  border-top-left-radius: 13px;
+  border-top-right-radius: 13px;
+  background-color: black;
+  color: white;
+  padding: 3px;
+}
+
+.busca {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}

@@ -5,157 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script type="text/javascript" src="anagrams1/anagrams.js"></script>
+    <link rel="stylesheet" href="./style/style.css" />
   </head>
 
   <body>
-    <div>
+    <div class="busca">
       <input type="text" id="input" size="40" value="ryan agard" />
       <button id="findButton">Encontrar Anagramas</button>
     </div>
-
-    <div id="res"></div>
-    <div id="res_cinco"></div>
-
-    <script>
-      const button = document.getElementById("findButton");
-      button.onclick = function () {
-        nome = document
-          .getElementById("input")
-          .value.toLowerCase()
-          .trim()
-          .replace(" ", "");
-
-        let palavraDoDicionario;
-        let resultado = [];
-        let input = qtdLetras(nome).sort().join("");
-        let possivel;
-        let comparar;
-
-        for (let i = 0; i < palavras.length; i++) {
-          possivel = qtdLetras(palavras[i]).sort().join("");
-          for (let a = 0; a <= possivel.length; a += 2) {
-            if (
-              input.indexOf(possivel[a]) >= 0 &&
-              possivel[a + 1] <= input[input.indexOf(possivel[a]) + 1]
-            ) {
-              if (a + 2 == possivel.length) {
-                resultado.push(palavras[i]);
-              }
-            } else {
-              break;
-            }
-          }
-        }
-
-        juntar_palavras5(resultado);
-        function juntar_palavras5(palavras_a_juntar) {
-          let cinco_palavras = [];
-          let tres_palavras = [];
-
-          for (let a = 0; a < palavras_a_juntar.length; a++) {
-            for (let b = 0; b < palavras_a_juntar.length; b++) {
-              if (a == b) break;
-              for (let c = 0; c < palavras_a_juntar.length; c++) {
-                if (a == c || b == c) break;
-
-                comparar_tres =
-                  palavras_a_juntar[a] +
-                  palavras_a_juntar[b] +
-                  palavras_a_juntar[c];
-                if (comparar_tres.length == nome.length) {
-                  if (
-                    comparar_tres.split("").sort().join("") ==
-                    nome.split("").sort().join("")
-                  ) {
-                    tres_palavras.push([
-                      palavras_a_juntar[a],
-                      palavras_a_juntar[b],
-                      palavras_a_juntar[c],
-                    ]);
-                  }
-                }
-
-                for (let d = 0; d < palavras_a_juntar.length; d++) {
-                  if (a == d || b == d || c == d) break;
-                  for (let e = 0; e < palavras_a_juntar.length; e++) {
-                    if (a == e || b == e || c == e || d == e) break;
-                    comparar_cinco =
-                      palavras_a_juntar[a] +
-                      palavras_a_juntar[b] +
-                      palavras_a_juntar[c] +
-                      palavras_a_juntar[d] +
-                      palavras_a_juntar[e];
-                    if (comparar_cinco.length == nome.length) {
-                      if (
-                        comparar_cinco.split("").sort().join("") ==
-                        nome.split("").sort().join("")
-                      ) {
-                        cinco_palavras.push([
-                          palavras_a_juntar[a],
-                          palavras_a_juntar[b],
-                          palavras_a_juntar[c],
-                          palavras_a_juntar[d],
-                          palavras_a_juntar[e],
-                        ]);
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-          console.log(cinco_palavras);
-          console.log(tres_palavras);
-          for (let f = 0; f < cinco_palavras.length; f++) {
-            cinco_palavras[f] = cinco_palavras[f].sort();
-          }
-          cinco_palavras = cinco_palavras.sort();
-
-          let final = remove_iguais(cinco_palavras);
-
-          document.getElementById("res_cinco").innerHTML +=
-            "Foi encontrado " +
-            final.length +
-            " anagramas de cinco palavras: <br>";
-
-          for (let i = 0; i < final.length; i++) {
-            document.getElementById("res_cinco").innerHTML += final[i] + "<br>";
-          }
-
-          for (let g = 0; g < tres_palavras.length; g++) {
-            tres_palavras[g] = tres_palavras[g].sort();
-          }
-          tres_palavras = tres_palavras.sort();
-
-          let final_tres = remove_iguais(tres_palavras);
-
-          document.getElementById("res").innerHTML +=
-            "Foi encontrado " +
-            final_tres.length +
-            " anagramas de três palavras: <br>";
-
-          for (let i = 0; i < final_tres.length; i++) {
-            document.getElementById("res").innerHTML += final_tres[i] + "<br>";
-          }
-        }
-
-        function remove_iguais(arr) {
-          return Array.from(new Set(arr.map((subarr) => subarr.join(" "))));
-        }
-
-        function qtdLetras(nome) {
-          let busca = [];
-          for (let i = 0; i < nome.length; i++) {
-            busca.push(nome[i].concat(nome.split(nome[i]).length - 1));
-          }
-
-          let totalLetras = busca.filter(function (item) {
-            return busca.hasOwnProperty(item) ? false : (busca[item] = true);
-          });
-
-          return totalLetras;
-        }
-      };
-    </script>
+    <div class="flex">
+      <div id="res_duas" class="resultado"></div>
+      <div id="res_tres" class="resultado"></div>
+      <div id="res_cinco" class="resultado"></div>
+    </div>
+    <script type="text/javascript" src="js/script.js"></script>
   </body>
 </html>
