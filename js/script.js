@@ -100,7 +100,6 @@ button.onclick = function () {
       }
     }
 
-    ////////////////
     for (let f = 0; f < cinco_palavras.length; f++) {
       cinco_palavras[f] = cinco_palavras[f].sort();
     }
